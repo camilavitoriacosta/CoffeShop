@@ -1,5 +1,7 @@
 from django.shortcuts import redirect, render
 from .models import *
+from django.contrib import auth
+
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -18,6 +20,22 @@ def cadastro_usuario(requisicao):
     return render(requisicao, 'usuarios/cadastro_usuario.html')
 
 def login(requisicao):
+    if requisicao.method == 'POST':
+        email = requisicao.POST['email']
+        senha = requisicao.POST['senha']
+        if not email.strip() or not senha.strip():
+            print('Os campos não podem ficar em branco')
+            return redirect('login')
+        
+        if User.objects.filter(email=email).exists:
+            usuario = auth.authenticate(requisicao, email=email, senha=senha)
+            if usuario is not None:
+                auth.login(requisicao, usuario)
+                print('login realizado com sucesso')
+
+        #Redirecionar para catalogo de produtos cadastrados, com opção de edição e adição de novos produtos
+        #return redirect('')
+    
     return render(requisicao, 'usuarios/login.html')
 
 def logout(requisicao):
