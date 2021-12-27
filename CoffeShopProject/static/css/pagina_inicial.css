@@ -1,0 +1,118 @@
+.titulo {   
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+.titulo h1{
+    font-size: 40px;
+    color: var(--rosa);
+    text-align: center;
+    margin: 10px;    
+}
+.titulo img{
+    width: 42px;
+    height: 56px;
+}
+
+.campo-pesquisa{
+    display: flex;
+    align-items: center;
+    min-width: 200px;
+    height: 30px;
+
+    background-color: var(--cinza-claro);
+    border: none;
+    border-radius: 20px;
+    margin-right:10px; 
+}
+.campo-pesquisa input{
+    background-color: var(--cinza-claro);
+    border: none;
+    border-radius: 20px;
+    height: 25px;
+    min-width: 300px;
+}
+.campo-pesquisa svg{
+    width: 14px;
+    margin-left: 8px;
+    margin-right: 4px;
+}
+
+.container{
+    margin: 10px;
+    padding: 5px;
+    opacity: 0.5;
+    border-radius: 7px;
+    min-width: 300px;
+}
+.container-link{
+    min-width: 340px;
+    height: 125px;
+}
+.container-link, .container-texto{
+    color:white;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.container-texto{
+    font-size: 30px;
+    margin: 5px;
+    padding: 40px 40px 40px 40px;
+    /* padding: top right bottom left */
+}
+
+.coffe{
+    background: url("../img/coffe/coffe1.jpg") no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.tea{
+    background: url("../img/tea.png") no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.smoothie{
+    background: url("../img/smoothie.png") no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+@media screen and (min-width: 768px){
+    section{
+        min-width: 1300px;
+    }
+    .campo-pesquisa{
+        max-width: 800px;
+        margin: auto;
+    }
+    .corpo{
+        margin:20px
+    }
+    .containers{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        
+        margin: auto;
+
+        min-width: 1100px;
+        max-width: 1300px;
+        height: 350px;
+    }
+    .container-link, .container{
+        width: 300px;
+        height: 300px;
+        background-size: 500px 400px;
+    }
+    .container-texto{
+        padding: 120px 45px 120px 45px;
+        width: 200px;
+    }
+}

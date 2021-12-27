@@ -1,0 +1,18 @@
+:root {
+    --cor-fundo: whitesmoke;
+    --cinza-claro: #E5E5E5;
+    --rosa: #E9AFC0;
+    --rosa-escuro: #F87DA1;
+}
+
+body {
+    background:  var(--cor-fundo);
+    margin: 0px;
+    min-width: 90vw;
+}
+
+.corpo {
+    min-width: 90vw;
+    margin: 40px auto;
+    padding: 10px;
+}
