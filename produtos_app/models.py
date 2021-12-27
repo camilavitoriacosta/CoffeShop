@@ -1,3 +1,9 @@
 from django.db import models
 
-# Create your models here.
+class Produto(models.Model):
+    nome_produto = models.CharField(max_length=50)
+    descricao = models.CharField(max_length=250)
+    preco = models.FloatField()
+    categoria = models.CharField(max_length=50)
+    
+
