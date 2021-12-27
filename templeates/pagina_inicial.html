@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load  static %}
+    
+{% block content %}
+
+    <section>
+        <div class="titulo">
+            <img src="{% static  'img/logo.png' %}" alt=""> 
+            <h1> Coffe Shop </h1>
+        </div>
+        <div class="corpo">
+
+            {% include 'partials/busca.html'%}
+
+            <div class="containers">
+                <a href="#" class="container-link"> 
+                    <div class="container coffe">
+                        <p class="container-texto"> COFFE </p>
+                    </div>
+                </a>
+                <a href="#" class="container-link"> 
+                    <div class="container tea">
+                        <p class="container-texto"> TEA </p>
+                    </div>
+                </a>
+                <a href="#" class="container-link"> 
+                    <div class="container smoothie">
+                        <p class="container-texto"> SMOOTHIE </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+    </section>
+{% endblock %}

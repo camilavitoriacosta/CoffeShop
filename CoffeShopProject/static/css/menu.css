@@ -1,0 +1,52 @@
+:root {
+    --cor-fundo: whitesmoke;
+    --cinza-claro: #E5E5E5;
+    --rosa: #E9AFC0;
+    --rosa-escuro: #F87DA1;
+}
+
+.cabecalho{
+    background-color: var(--rosa);
+    background-size: cover;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    
+    min-width: 380px;
+    margin: 0px 0px 40px 0px;
+    padding: 0px;
+}
+
+.item-cabelho-menu{
+    text-decoration: none;
+    color: var(--cor-fundo);
+    font-size: 16px;
+    
+    margin:20px;
+    width: 100px;
+    height: 24px;
+}
+.cabecalho .icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 24px;
+}
+
+
+@media screen and (min-width: 768px){
+    .cabecalho{
+        min-width: 1300px;
+        width: 100%;
+    }
+    .cabecalho{
+        height: 60px;
+    }
+    .item-cabelho-menu{
+        text-align: center;
+        padding: 5px;
+        margin: 15px;
+    }
+}
