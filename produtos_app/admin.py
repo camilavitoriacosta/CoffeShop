@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
+class ListandoProdutos(admin.ModelAdmin):
+    list_display = ('id', 'nome_produto', 'categoria')
+    list_display_links = ('id', 'nome_produto')
+
+admin.site.register(Produto, ListandoProdutos)
