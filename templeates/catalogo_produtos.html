@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+<!-- {% load static %} -->
+    
+{% block content %}
+
+<section>
+    <h1 class="categoria--produto"> Categoria </h1>
+    <div class="produtos">
+        {% for produto in produtos  %}
+        <div class="produto">
+            <img class="produto--imagem" src="{{ produto.foto_produto.url }}" alt="foto produto">
+            <div class="produto--informacoes">
+                <h1 class="produto--nome">  {{ produto.nome_produto}} </h1>
+                <p class="produto--descricao">{{ produto.descricao}} </p>
+                <p class="produto--preco"> R$ {{ produto.preco}} </p>
+            </div>
+        </div>
+    {% endfor%}
+    </div>
+</section>
+
+
+{% endblock %}
