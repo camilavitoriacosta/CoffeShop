@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+<!-- {% load static %} -->
+    
+{% block content %}
+
+    <section class="usuario--login">
+        <form class='formulario' action="{% url 'login'%}" method="post"> 
+            {% csrf_token %}
+            <h1 class="titulo--form"> Login </h1>
+
+            <div>
+                <h2 class="titulo--input"> Email </h2>
+                <input class="input--texto" type="email" id="email" name="email" required>
+            </div>
+
+            <div>
+                <h2 class="titulo--input"> Senha </h2>
+                <input class="input--texto" type="password" id="senha" name="senha" required>
+            </div>
+           
+            <button type="submit" class="botao"> Acessar Conta </button>
+        </form>
+    </section>
+
+{% endblock %}

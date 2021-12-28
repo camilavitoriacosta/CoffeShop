@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+<!-- {% load static %} -->
+    
+{% block content %}
+
+    <section class="usuario--cadastro">
+        <form class='formulario' action="{% url 'cadastro_usuario'%}" method="post"> 
+            {% csrf_token %}
+            <h1 class="titulo--form"> Criar Conta </h1>
+
+            <div>
+                <h2 class="titulo--input"> Nome </h2>
+                <input class="input--texto" type="text" id="nome" name="nome" required>
+            </div>
+
+            <div>
+                <h2 class="titulo--input"> Email </h2>
+                <input class="input--texto" type="email" id="email" name="email" required>
+            </div>
+
+            <div>
+                <h2 class="titulo--input"> Senha </h2>
+                <input class="input--texto" type="password" id="senha" name="senha" required>
+            </div>
+            <div>
+                <h2 class="titulo--input"> Confirmação de senha </h2>
+                <input class="input--texto" type="password" id="senha_confirmacao" name="senha_confirmacao" required>
+            </div>
+
+            <button type="submit" class="botao"> Cadastrar </button>
+        </form>
+    </section>
+
+{% endblock %}

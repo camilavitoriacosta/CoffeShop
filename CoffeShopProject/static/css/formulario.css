@@ -1,0 +1,40 @@
+.formulario{
+    margin: auto;
+    width: 30%;
+    border: 2px solid var(--rosa);
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.titulo--form{
+    color: var(--rosa);
+    font-weight: bolder;
+    font-size: 32px;
+}
+
+.input--texto{
+    background: var(--cor-fundo);
+    border: none;
+    border-radius: 5px;
+    margin: 0;
+    width: 95%;
+    padding: 5px;
+}
+
+.titulo--input{
+    font-size: 16px;
+    margin: 5px;
+}
+
+.botao{
+    background: var(--rosa);
+    color: white;
+    border:none;
+    border-radius: 5px;
+
+    width: 40%;
+    
+    margin: 20px 110px 10px 110px;
+    padding: 5px;
+    cursor: pointer;
+}
