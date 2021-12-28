@@ -1,3 +1,4 @@
+from typing import Tuple
 from django.shortcuts import redirect, render
 from .models import *
 from django.contrib import auth
@@ -7,12 +8,13 @@ from django.contrib.auth.models import User
 # Create your views here.
 def cadastro_usuario(requisicao):
     if requisicao.method == 'POST':
+        nome = requisicao.POST['nome']
         email = requisicao.POST['email']
         senha = requisicao.POST['senha']
         senha_confirmacao = requisicao.POST['senha_confirmacao']
 
         # Validar campos
-        valida_campos(email,senha,senha_confirmacao)
+        valida_campos(nome,email,senha,senha_confirmacao)
         #Mostrar mensagem para o usuario de sucesso ou erro
         print('Usuario criado com sucesso')
         return redirect('login')
@@ -28,13 +30,13 @@ def login(requisicao):
             return redirect('login')
         
         if User.objects.filter(email=email).exists:
-            usuario = auth.authenticate(requisicao, email=email, senha=senha)
+            nome = nome = User.objects.filter(email=email).values_list('username', flat=True).get()
+            usuario = auth.authenticate(requisicao, username=nome, password=senha)
             if usuario is not None:
                 auth.login(requisicao, usuario)
                 print('login realizado com sucesso')
-
-        #Redirecionar para catalogo de produtos cadastrados, com opção de edição e adição de novos produtos
-        #return redirect('')
+                #Redirecionar para catalogo de produtos cadastrados, com opção de edição e adição de novos produtos
+                #return redirect('')
     
     return render(requisicao, 'usuarios/login.html')
 
@@ -42,7 +44,7 @@ def logout(requisicao):
     pass
 
 
-def valida_campos(email, senha, senha_confirmacao):
+def valida_campos(nome, email, senha, senha_confirmacao):
     if not email.strip():
         print('O campo email não pode ficar em branco')
         return redirect('cadastro_usuario')
@@ -62,11 +64,11 @@ def valida_campos(email, senha, senha_confirmacao):
         return redirect('cadastro_usuario')
     else:
         # Inserir usuario no banco
-        cadastrar_Usuario(email, senha)
+        cadastrar_Usuario(nome,email, senha)
         return redirect('login')
 
         
 
-def cadastrar_Usuario(email, senha):
-    usuario = Usuario(email=email, senha=senha)
+def cadastrar_Usuario(nome, email, senha):
+    usuario = User.objects.create_user(username=nome,email=email, password=senha)
     usuario.save()
