@@ -1,0 +1,20 @@
+/* ALERTAS */
+.alerta{
+    padding: 10px;
+    margin: 20px;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    width: 60%;
+}
+
+.alerta-danger{
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-success{
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
