@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+<!-- {% load static %} -->    
+{% block content %}
+
+<section class="produto--cadastro">
+    <form class='formulario' action="{% url 'cadastro_produtos'%}" method="post"> {% csrf_token %}
+        <h1 class="titulo--form"> Cadastrar produto </h1>
+
+       <div class="produto--nome--cadastro">
+        <h2 class="titulo--input"> Nome </h2>
+        <input class="input--texto" type="text" id="nome" name="nome">
+       </div>
+
+       <div class="produto--descricao--cadastro">
+        <h2 class="titulo--input" > Descrição </h2>
+        <input class="input--texto" type="text-area" id="descricao" name="descricao">
+       </div>
+
+        <div class="produto--preco--cadastro">
+            <h2 class="titulo--input"> Preço </h2>
+            <input class="input--texto" type="text" id="preco" name="preco">
+        </div>
+
+        <div class="produto--categoria--cadastro">
+            <h2 class="titulo--input"> Categoria </h2>
+            <input class="input--texto" type="text" id="categoria" name="categoria">           
+        </div>
+        <div class="produto--foto">
+            <h2 class="titulo--input"> Foto do produto </h2>
+            <input type="file" accept="image/*" name="foto-produto"/>
+        </div>
+    </div>
+
+        <button type="submit" class="botao"> Cadastrar </button>
+    </form>
+</section>
+
+
+{% endblock %}
+
