@@ -1,5 +1,5 @@
-from typing import Tuple
 from django.shortcuts import redirect, render
+from produtos_app.models import *
 from .models import *
 from django.contrib import auth
 
@@ -36,12 +36,14 @@ def login(requisicao):
                 auth.login(requisicao, usuario)
                 print('login realizado com sucesso')
                 #Redirecionar para catalogo de produtos cadastrados, com opção de edição e adição de novos produtos
-                #return redirect('')
+                return redirect('produtos')
     
     return render(requisicao, 'usuarios/login.html')
 
+
 def logout(requisicao):
-    pass
+    auth.logout(requisicao)
+    return redirect('pagina_inicial')
 
 
 def valida_campos(nome, email, senha, senha_confirmacao):
@@ -67,8 +69,23 @@ def valida_campos(nome, email, senha, senha_confirmacao):
         cadastrar_Usuario(nome,email, senha)
         return redirect('login')
 
-        
-
 def cadastrar_Usuario(nome, email, senha):
     usuario = User.objects.create_user(username=nome,email=email, password=senha)
     usuario.save()
+
+
+
+def produtos(requisicao):
+    if requisicao.user.is_authenticated:
+
+        produtos =  Produto.objects.all()
+        dados = {
+            'produtos': produtos
+        }
+        
+        return render(requisicao, 'usuarios/produtos.html', dados)
+    else:
+        return redirect('pagina_inicial')
+
+def cadastro_produtos(requisicao):
+    return render(requisicao, 'produtos/cadastro_produto.html')

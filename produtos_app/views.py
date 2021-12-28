@@ -10,7 +10,7 @@ def catalogo_produtos_coffe(requisicao):
         'produtos': produtos
     }
     
-    return render(requisicao, 'catalogo_produtos.html', dados)
+    return render(requisicao, 'produtos/catalogo_produtos.html', dados)
 
 def catalogo_produtos_tea(requisicao):
     produtos = filtrar_produto_por_categoria("tea")    
@@ -18,14 +18,14 @@ def catalogo_produtos_tea(requisicao):
         'produtos': produtos
     }
     
-    return render(requisicao, 'catalogo_produtos.html', dados)
+    return render(requisicao, 'produtos/catalogo_produtos.html', dados)
 
 def catalogo_produtos_smoothie(requisicao):
     produtos = filtrar_produto_por_categoria("smoothie")    
     dados = {
         'produtos': produtos
     }
-    return render(requisicao, 'catalogo_produtos.html', dados)
+    return render(requisicao, 'produtos/catalogo_produtos.html', dados)
 
 def filtrar_produto_por_categoria(categoria_produto):
     return Produto.objects.filter(categoria=categoria_produto)
@@ -40,4 +40,4 @@ def buscar_produto(requisicao):
             'produtos': lista_produtos
         }
 
-    return render(requisicao, 'catalogo_produtos.html', dados)
+    return render(requisicao, 'produtos/catalogo_produtos.html', dados)
