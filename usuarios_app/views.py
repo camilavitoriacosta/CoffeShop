@@ -1,11 +1,11 @@
 from django.shortcuts import redirect, render
+
 from produtos_app.models import *
 from .models import *
-from django.contrib import auth
 
+from django.contrib import auth, messages
 from django.contrib.auth.models import User
 
-# Create your views here.
 def cadastro_usuario(requisicao):
     if requisicao.method == 'POST':
         nome = requisicao.POST['nome']
@@ -14,11 +14,32 @@ def cadastro_usuario(requisicao):
         senha_confirmacao = requisicao.POST['senha_confirmacao']
 
         # Validar campos
-        valida_campos(nome,email,senha,senha_confirmacao)
-        #Mostrar mensagem para o usuario de sucesso ou erro
-        print('Usuario criado com sucesso')
-        return redirect('login')
+        # Verificar se o usuario já existe
+        if User.objects.filter(email=email).exists():
+            messages.error(requisicao, 'Usuario já cadastrado')
+            return redirect('cadastro_usuario')
+        if campo_vazio(nome):
+            messages.error(requisicao, 'O campo nome não pode ficar em branco')
+            return redirect('cadastro_usuario')
+        if campo_vazio(email):
+            messages.error(requisicao, 'O campo email não pode ficar em branco')
+            return redirect('cadastro_usuario')
+        if campo_vazio(senha):
+            messages.error(requisicao, 'O campo senha não pode ficar em branco')
+            return redirect('cadastro_usuario')
+        if campo_vazio(senha_confirmacao):
+            messages.error(requisicao, 'O campo de confirmação de senha não pode ficar em branco')
+            return redirect('cadastro_usuario')
+        if senha != senha_confirmacao:
+            messages.error(requisicao, 'Senhas não conferem')
+            return redirect('cadastro_usuario')
 
+        # Inserir usuario no banco
+        usuario = User.objects.create_user(username=nome,email=email, password=senha)
+        usuario.save()
+        messages.success(requisicao, 'Usuario criado com sucesso')
+        return redirect('login')
+        
     return render(requisicao, 'usuarios/cadastro_usuario.html')
 
 def login(requisicao):
@@ -26,7 +47,7 @@ def login(requisicao):
         email = requisicao.POST['email']
         senha = requisicao.POST['senha']
         if not email.strip() or not senha.strip():
-            print('Os campos não podem ficar em branco')
+            messages.error(requisicao, 'Os campos não podem ficar em branco')
             return redirect('login')
         
         if User.objects.filter(email=email).exists:
@@ -34,7 +55,7 @@ def login(requisicao):
             usuario = auth.authenticate(requisicao, username=nome, password=senha)
             if usuario is not None:
                 auth.login(requisicao, usuario)
-                print('login realizado com sucesso')
+                messages.success(requisicao, 'Login realizado com sucesso')
                 #Redirecionar para catalogo de produtos cadastrados, com opção de edição e adição de novos produtos
                 return redirect('produtos')
     
@@ -44,37 +65,12 @@ def login(requisicao):
 def logout(requisicao):
     auth.logout(requisicao)
     return redirect('pagina_inicial')
+  
 
+def campo_vazio(campo):
+    return not campo.strip()
 
-def valida_campos(nome, email, senha, senha_confirmacao):
-    if not email.strip():
-        print('O campo email não pode ficar em branco')
-        return redirect('cadastro_usuario')
-    if not senha.strip():
-        print('O campo senha não pode ficar em branco')
-        return redirect('cadastro_usuario')
-    if not senha_confirmacao.strip():
-        print('O campo de confirmação de senha não pode ficar em branco')
-        return redirect('cadastro_usuario')
-    if senha != senha_confirmacao:
-        print('Senhas não conferem')
-        return redirect('cadastro_usuario')
-    
-    # Verificar se o usuario já existe
-    if User.objects.filter(email=email).exists():
-        print('Usuario já cadastrado')
-        return redirect('cadastro_usuario')
-    else:
-        # Inserir usuario no banco
-        cadastrar_Usuario(nome,email, senha)
-        return redirect('login')
-
-def cadastrar_Usuario(nome, email, senha):
-    usuario = User.objects.create_user(username=nome,email=email, password=senha)
-    usuario.save()
-
-
-
+### PRODUTOS ###
 def produtos(requisicao):
     if requisicao.user.is_authenticated:
 
@@ -87,5 +83,21 @@ def produtos(requisicao):
     else:
         return redirect('pagina_inicial')
 
+
 def cadastro_produtos(requisicao):
+    if requisicao.method == 'POST':
+        inserir_produto(requisicao)
+        messages.success(requisicao, 'Produto criado com sucesso')
+        return redirect('produtos')
     return render(requisicao, 'produtos/cadastro_produto.html')
+
+def inserir_produto(requisicao):
+    nome = requisicao.POST['nome']
+    descricao = requisicao.POST['descricao']
+    preco = requisicao.POST['preco']
+    categoria = requisicao.POST['categoria']
+    foto = requisicao.FILES.get('foto-produto', '')
+
+    produto = Produto(nome_produto=nome, descricao=descricao, preco=preco, categoria=categoria, foto_produto=foto)
+    produto.save()
+
