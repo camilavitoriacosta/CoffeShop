@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from produtos_app.models import *
 from .models import *
@@ -100,4 +100,10 @@ def inserir_produto(requisicao):
 
     produto = Produto(nome_produto=nome, descricao=descricao, preco=preco, categoria=categoria, foto_produto=foto)
     produto.save()
+
+def deleta_produto(requisicao, produto_id):
+    produto = get_object_or_404(Produto,pk=produto_id)
+    produto.delete()
+    messages.success(requisicao, 'Produto deletado com sucesso')
+    return redirect('produtos')
 
