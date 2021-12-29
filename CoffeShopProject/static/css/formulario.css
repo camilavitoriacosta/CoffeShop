@@ -1,7 +1,7 @@
 
 .formulario{
     margin: auto;
-    width: 30%;
+    width: 70%;
     border: 2px solid var(--rosa);
     border-radius: 5px;
     padding: 15px;
@@ -42,4 +42,16 @@
 
 .formulario-div-botoes{
     margin:10px;
+}
+
+.produto--imagem--selecionada{
+    width: 100px;
+}
+
+
+@media screen and (min-width: 768px){
+    .formulario{
+        width: 30%;
+    }
+
 }
