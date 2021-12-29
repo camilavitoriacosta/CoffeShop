@@ -1,14 +1,13 @@
 {% load static %}
 <header class="cabecalho">
     {% if user.is_authenticated %}
-        <a href="{% url 'cadastro_produtos' %}" class="item-cabelho-menu"> Adicionar Produto </a>
-        <a href="{% url 'logout' %}" class="item-cabelho-menu"> Sair </a>
         <a href="{% url 'produtos' %}" class="item-cabelho-menu icon"> 
             <!-- XICARA ICON -->
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cup-fill" viewBox="0 0 16 16">
                 <path d="M1 2a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v1h.5A1.5 1.5 0 0 1 16 4.5v7a1.5 1.5 0 0 1-1.5 1.5h-.55a2.5 2.5 0 0 1-2.45 2h-8A2.5 2.5 0 0 1 1 12.5V2zm13 10h.5a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.5-.5H14v8z"/>
             </svg>
         </a>
+        <a href="{% url 'logout' %}" class="item-cabelho-menu"> SAIR </a>
     {% else %}
         <a href="{% url 'pagina_inicial' %}" class="item-cabelho-menu icon"> 
             <!-- XICARA ICON -->
@@ -16,11 +15,15 @@
                 <path d="M1 2a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v1h.5A1.5 1.5 0 0 1 16 4.5v7a1.5 1.5 0 0 1-1.5 1.5h-.55a2.5 2.5 0 0 1-2.45 2h-8A2.5 2.5 0 0 1 1 12.5V2zm13 10h.5a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.5-.5H14v8z"/>
             </svg>
         </a>
-        <a href="{% url 'catalogo_produtos_coffe' %}" class="item-cabelho-menu"> COFFE </a>
-        <a href="{% url 'catalogo_produtos_tea' %}" class="item-cabelho-menu"> TEA </a>
-        <a href="{% url 'catalogo_produtos_smoothie' %}" class="item-cabelho-menu"> SMOOTHIE </a>
-        <a href="{% url 'cadastro_usuario' %}" class="item-cabelho-menu"> Criar Conta </a>
-        <a href="{% url 'login' %}" class="item-cabelho-menu"> Login </a>
+        <div class="filtros--menu">
+            <a href="{% url 'catalogo_produtos_coffe' %}" class="item-cabelho-menu"> COFFE </a>
+            <a href="{% url 'catalogo_produtos_tea' %}" class="item-cabelho-menu"> TEA </a>
+            <a href="{% url 'catalogo_produtos_smoothie' %}" class="item-cabelho-menu"> SMOOTHIE </a>
+        </div>
+        <div class="acoes--usuario">
+            <a href="{% url 'cadastro_usuario' %}" class="item-cabelho-menu"> Criar Conta </a>
+            <a href="{% url 'login' %}" class="item-cabelho-menu"> Login </a>
+        </div>
     {% endif %}
 </header>
 

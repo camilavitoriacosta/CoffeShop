@@ -5,30 +5,50 @@ from .models import *
 def pagina_inicial(requisicao):
     return render(requisicao, 'pagina_inicial.html')
 
-def catalogo_produtos_coffe(requisicao):
+def buscar_produtos_categoria_coffe():
     produtos = filtrar_produto_por_categoria("coffe")    
     dados = {
         'produtos': produtos
     }
-    
-    return render(requisicao, 'produtos/catalogo_produtos.html', dados)
+    return dados
 
-def catalogo_produtos_tea(requisicao):
+def catalogo_produtos_coffe(requisicao):
+    """ Gera catalogo filtrado pela categoria para usuarios não logados"""  
+    return render(requisicao, 'produtos/catalogo_produtos.html', buscar_produtos_categoria_coffe())
+
+def produtos_coffe(requisicao):   
+    """ Gera catalogo filtrado pela categoria para usuarios logados"""  
+    return render(requisicao, 'usuarios/produtos.html', buscar_produtos_categoria_coffe())
+
+def buscar_produtos_categoria_tea():
     produtos = filtrar_produto_por_categoria("tea")    
     dados = {
         'produtos': produtos
     }
-    
-    return render(requisicao, 'produtos/catalogo_produtos.html', dados)
+    return dados
+
+def catalogo_produtos_tea(requisicao):  
+    """ Gera catalogo filtrado pela categoria para usuarios não logados"""   
+    return render(requisicao, 'produtos/catalogo_produtos.html', buscar_produtos_categoria_tea())
+
+def produtos_tea(requisicao):  
+    """ Gera catalogo filtrado pela categoria para usuarios logados"""   
+    return render(requisicao, 'usuarios/produtos.html', buscar_produtos_categoria_tea())
+
+def buscar_produtos_categoria_smoothie():
+    produtos = filtrar_produto_por_categoria("smoothie")    
+    return  { 'produtos': produtos }
 
 def catalogo_produtos_smoothie(requisicao):
-    produtos = filtrar_produto_por_categoria("smoothie")    
-    dados = {
-        'produtos': produtos
-    }
-    return render(requisicao, 'produtos/catalogo_produtos.html', dados)
+    """ Gera catalogo filtrado pela categoria para usuarios não logados"""   
+    return render(requisicao, 'produtos/catalogo_produtos.html', buscar_produtos_categoria_smoothie())
+
+def produtos_smoothie(requisicao):
+    """ Gera catalogo filtrado pela categoria para usuarios logados"""   
+    return render(requisicao, 'usuarios/produtos.html', buscar_produtos_categoria_smoothie())
 
 def filtrar_produto_por_categoria(categoria_produto):
+    """ Filtra produtos pela categoria especificada """
     return Produto.objects.filter(categoria=categoria_produto)
     
 def buscar_produto(requisicao):
@@ -44,6 +64,7 @@ def buscar_produto(requisicao):
     return render(requisicao, 'produtos/catalogo_produtos.html', dados)
 
 def produtos(requisicao):
+    """ Gera catalogo para usuarios logados"""   
     if requisicao.user.is_authenticated:
 
         produtos =  Produto.objects.all()
@@ -54,7 +75,6 @@ def produtos(requisicao):
         return render(requisicao, 'usuarios/produtos.html', dados)
     else:
         return redirect('pagina_inicial')
-
 
 def cadastro_produtos(requisicao):
     if requisicao.method == 'POST':
