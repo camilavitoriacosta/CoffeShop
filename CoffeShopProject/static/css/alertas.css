@@ -1,13 +1,14 @@
 /* ALERTAS */
-.alerta{
-    padding: 10px;
-    margin: 20px;
+.alert{
+    padding: 20px;
+    margin: 10px auto;
     border: 1px solid transparent;
     border-radius: 0.25rem;
     width: 60%;
+    text-align: center;
 }
 
-.alerta-danger{
+.alert-danger{
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb;
