@@ -1,7 +1,6 @@
 {% load static %}
 <header class="cabecalho">
     {% if user.is_authenticated %}
-        <a href="{% url 'cadastro_produtos' %}" class="item-cabelho-menu"> Adicionar Produto </a>
         <a href="{% url 'logout' %}" class="item-cabelho-menu"> Sair </a>
         <a href="{% url 'produtos' %}" class="item-cabelho-menu icon"> 
             <!-- XICARA ICON -->
