@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+<!-- {% load static %} -->    
+{% block content %}
+
+<section class="produto--cadastro">
+    <form class='formulario' action="{% url 'atualizar_produto'%}" method="post"> {% csrf_token %}
+        <h1 class="titulo--form"> Cadastrar produto </h1>
+        <input class="input--texto" type="text" id="produto_id" name="produto_id" value='{{produto.id}}' hidden>
+       <div class="produto--nome--cadastro">
+        <h2 class="titulo--input"> Nome </h2>
+        <input class="input--texto" type="text" id="nome" name="nome" value='{{produto.nome_produto}}'>
+       </div>
+
+       <div class="produto--descricao--cadastro">
+        <h2 class="titulo--input" > Descrição </h2>
+        <input class="input--texto" type="text-area" id="descricao" name="descricao" value='{{produto.descricao}}'>
+       </div>
+
+        <div class="produto--preco--cadastro">
+            <h2 class="titulo--input"> Preço </h2>
+            <input class="input--texto" type="number" step="0.01" id="preco" name="preco" value='{{produto.preco}}'>
+        </div>
+
+        <div class="produto--categoria--cadastro">
+            <h2 class="titulo--input"> Categoria </h2>
+            <input class="input--texto" type="text" id="categoria" name="categoria" value='{{produto.categoria}}'>           
+        </div>
+        
+        <div class="produto--foto">
+            <div>
+                <h2 class="titulo--input"> Foto utilizada </h2>
+                {% if produto.foto_produto == '' %}
+                        <img class="produto--imagem" src="{%static 'img/imagem_padrao.png'%}" alt="foto produto">
+                {% else %}
+                    <img class='produto--imagem--selecionada' src="{{produto.foto_produto.url}}" alt="foto utilizada">
+                {% endif %}
+            </div>
+            <h2 class="titulo--input"> Adicionar nova foto do produto </h2>
+            <input type="file" accept="image/*" name="foto-produto"/>
+        </div>
+    </div>
+
+        <button type="submit" class="botao"> Atualizar </button>
+    </form>
+</section>
+
+
+{% endblock %}
+

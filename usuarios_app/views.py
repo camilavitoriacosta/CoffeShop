@@ -107,3 +107,26 @@ def deleta_produto(requisicao, produto_id):
     messages.success(requisicao, 'Produto deletado com sucesso')
     return redirect('produtos')
 
+def edita_produto(requisicao, produto_id):
+    produto = get_object_or_404(Produto, pk=produto_id)
+    produto_a_editar = { 'produto': produto }
+    return render(requisicao, 'produtos/edita_produto.html', produto_a_editar)
+
+def atualizar_produto(requisicao):
+    if requisicao.method == 'POST':
+        produto_id = requisicao.POST['produto_id']
+        produto = Produto.objects.get(pk=produto_id)
+
+        produto.nome = requisicao.POST['nome']
+        produto.descricao = requisicao.POST['descricao']
+        produto.preco = requisicao.POST['preco']
+        produto.categoria = requisicao.POST['categoria']
+        produto.foto_produto = requisicao.FILES.get('foto-produto', produto.foto_produto)
+
+        produto.save()
+
+        messages.success(requisicao, 'Produto atualizado com sucesso')
+        return redirect('produtos')
+
+
+
