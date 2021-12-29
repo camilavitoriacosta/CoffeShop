@@ -1,7 +1,15 @@
+.titulo--pagina{
+    margin: 10px auto;
+    color: var(--rosa);
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}
 .categorias{
     display: flex;
     gap: 5px;
-    margin: 10px 40px;
+    margin: 10px auto;
+    width: 300px;
 }
 .categoria--botao{
     background: var(--rosa);
@@ -18,17 +26,28 @@
 .cadastro--produto--atalho{
     display: flex;
     align-items: center;
+    gap: 5px;
     
-    margin: 10px 40px;
+    margin:10px auto;
+    width: 300px;
 }
 
 .link--adicionar{
     text-decoration: none;
     text-align: center;
-    color: whitesmoke;
+    color: var(--rosa);
+    font-size: 20px;
 }
 
 .botao--remover, .botao--editar{
     text-decoration: none;
     color: black;
+}
+@media screen and (min-width: 768px){
+    .categorias, .cadastro--produto--atalho, .titulo--pagina{
+        margin: 10px 50px;
+    }
+    .titulo--pagina{
+        text-align: left;
+    }
 }
