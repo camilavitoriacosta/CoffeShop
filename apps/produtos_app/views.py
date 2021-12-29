@@ -8,6 +8,7 @@ def pagina_inicial(requisicao):
 def buscar_produtos_categoria_coffe():
     produtos = filtrar_produto_por_categoria("coffe")    
     dados = {
+        'categoria': "Coffe",
         'produtos': produtos
     }
     return dados
@@ -23,6 +24,7 @@ def produtos_coffe(requisicao):
 def buscar_produtos_categoria_tea():
     produtos = filtrar_produto_por_categoria("tea")    
     dados = {
+        'categoria': "Tea",
         'produtos': produtos
     }
     return dados
@@ -37,7 +39,7 @@ def produtos_tea(requisicao):
 
 def buscar_produtos_categoria_smoothie():
     produtos = filtrar_produto_por_categoria("smoothie")    
-    return  { 'produtos': produtos }
+    return  { 'categoria': "Smoothie", 'produtos': produtos }
 
 def catalogo_produtos_smoothie(requisicao):
     """ Gera catalogo filtrado pela categoria para usuarios não logados"""   

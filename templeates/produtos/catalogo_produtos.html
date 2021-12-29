@@ -4,7 +4,7 @@
 {% block content %}
 
 <section>
-    <h1 class="categoria--produto"> Categoria </h1>
+    <h1 class="categoria--produto"> {{ categoria }} </h1>
     <div class="produtos">
         {% if produtos %}
             {% for produto in produtos  %}
